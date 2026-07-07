@@ -1,63 +1,77 @@
-// function App() {
-//   // const students = [
-//   //   { id: 1, name: "Mohit" },
-//   //   { id: 2, name: "Rohit" },
-//   //   { id: 3, name: "Neha" },
-//   // ];
+// // import React from "react";
+// // class App extends React.Component{
+// //   state = {
+// //     count:0
+// //   }
+// //   componentDidMount(){
+// //     console.log("Comp Mounted");
+// //   }
+// //   componentDidUpdate(){
+// //     console.log("Comp Updated");
+// //   }
+// //   componentWillUnmount(){
+// //     console.log("Comp Removed");
+// //   }
+// //   render(){
+// //     return(
+// //       <button onClick={()=> this.setState({ count: this.state.count + 1})}>Count {this.state.count}</button>
+// //       <h1>Test</h1>
+// //     )
+// //   }
+// // }
+// // export default App;
 
-//   const students = [];
-
-//   return (
-//     <ul>
-//       {students.length !== 0 && students.map((student) => {
-//         return (
-//           <h3 key={student.id}>
-//             {student.name} {student.id}
-//           </h3>
-//         );
-//       })}
-//     </ul>
-//   );
-// }
-// export default App;
-
-// import React,{useState} from 'react';
+// import { useEffect, useState } from "react";
 
 // function App(){
-//   const [name, setName]= useState("");
-
-//   const hadleSubmit = (e)=>{
-//     e.preventDefault();
-//     console.log("Name:", name);
-//   }
+//   const [count, setCount]= useState(0)
+//   //  useEffect(()=>{
+//   //   console.log("Comp Mount");
+//   // },[])
+//   // useEffect(()=>{
+//   //   console.log("Comp Change: ", count);
+//   // },[count])
+//   useEffect(()=>{
+//     const timer = setInterval(()=>{
+//       console.log("Running");
+//     },1000)
+//     return()=>{
+//       clearInterval(timer)
+//     }
+//   },[])
 //   return(
-//     <form onSubmit={hadleSubmit}>
-//       <input
-//         type='text'
-//         value={name}
-//         onChange={(e)=> setName(e.target.value)}
-//         placeholder='Enter Name'
-//         />
-//       <button type='submit'>Submit</button>
-//     </form>
+//     <button onClick={()=> setCount(count+1)}>Count {count}</button>
 //   )
 // }
 // export default App;
 
-import React,{ useRef } from "react";
+
+import { useState, useEffect } from "react";
+
+function Child() {
+  useEffect(() => {
+    console.log("Child Mounted");
+
+    return () => {
+      console.log("Child Unmounted");
+    };
+  }, []);
+
+  return <h2>Child Component</h2>;
+}
 
 function App() {
-  const inputRef = useRef(null);
+  const [show, setShow] = useState(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Name:", inputRef);
-  };
   return (
     <>
-      <h1>Hello</h1>
-      <h1>Welcome</h1>
+      <button onClick={() => setShow(!show)}>
+        Toggle Child
+      </button>
+
+      {show && <Child />}
     </>
   );
 }
+
 export default App;
