@@ -1,31 +1,20 @@
-// import { useRef } from "react";
-import useCouter from "./useCouter";
+import { Link, Outlet } from "react-router";
 
 function App(){
-  // const inputRef = useRef(null)
-  // const currentRef = useRef(0)
-
-  // const focusInput = ()=>{
-  //   console.log(inputRef);
-  //   inputRef.current.focus()
-  // }
-
-  // const increse = ()=>{
-  //   currentRef.current +=1 
-  //   console.log(currentRef.current);
-  // }
-  const { count, inc, dec, reset } = useCouter(5)
   return(
     <div>
-      {/* <input ref={inputRef} type="text" />
-      <button onClick={focusInput}>Focus</button>
-      <button onClick={increse}>+</button> */}
-      <h1>Count: {count}</h1>
-      <button onClick={inc}>+</button>
-      <button onClick={dec}>+</button>
-      <button onClick={reset}>Reset</button>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/users/1">User 1</Link>
+        <Link to="/users/2">User 2</Link>
+        <Link to="/users/3">User 3</Link>
+        <Link to="/users/4">User 4</Link>
+        <Link to="/login">Login</Link>
+      </nav>
+      <hr />
+      <Outlet />
     </div>
   )
 }
-
 export default App;
